@@ -15,6 +15,7 @@ class PDFReport(FPDF):
         self._add_header()
 
     def _timestamp(self):
+        # Ripristino i due punti per compatibilità Linux
         return datetime.now().strftime("%d-%m-%Y__%H:%M:%S")
 
     def _add_logo(self):
@@ -47,13 +48,21 @@ class PDFReport(FPDF):
             self.set_font("Helvetica", size=10)
             self.set_fill_color(245, 245, 245)
             for row in content:
-                for v in row.values():
-                    text = str(v)
+                # Calcola l'altezza massima della riga
+                cell_texts = [str(v) for v in row.values()]
+                line_heights = [self.get_string_width(text) / (col_width - 2) for text in cell_texts]
+                # Stima il numero di righe necessarie per ogni cella
+                n_lines = [max(1, int(self.get_string_width(text) / (col_width - 2))) for text in cell_texts]
+                max_lines = max(n_lines)
+                row_height = 6 * max_lines
+                x_start = self.get_x()
+                y_start = self.get_y()
+                for i, text in enumerate(cell_texts):
                     x = self.get_x()
                     y = self.get_y()
-                    self.multi_cell(col_width, 6, text, 1, max_line_height=6)
+                    self.multi_cell(col_width, 6, text, 1, 'L')
                     self.set_xy(x + col_width, y)
-                self.ln()
+                self.ln(row_height)
         else:
             if isinstance(content, list):
                 content = "\n".join(str(item) for item in content)
