@@ -1,20 +1,28 @@
 
-# Snapp - System Snapshot Audit Tool
+# SnapAudit - System Snapshot Audit Tool
 
-Snapp è un'applicazione Python per effettuare snapshot del sistema GNU/Linux, raccogliendo informazioni sui servizi attivi, utenti configurati e loggati, porte aperte e ultime modifiche ai file di sistema.  
-Genera report PDF chiari e completi e offre una GUI moderna per gestire e visualizzare i report.
+**SnapAudit** è un'applicazione Python per effettuare snapshot di sistema su macchine GNU/Linux.  
+Raccoglie automaticamente informazioni cruciali sulla sicurezza come:
+
+- servizi attivi
+- utenti attualmente loggati
+- porte aperte in ascolto
+- modifiche recenti ai file di configurazione di sistema (`/etc`)
+
+Genera report PDF chiari, datati automaticamente e offre una **GUI moderna e interattiva** per la gestione dei report.
 
 ---
 
 ## Funzionalità
 
-- Scansione e snapshot dei servizi attivi  
-- Rilevazione degli utenti configurati e attivi al momento dell'audit  
-- Identificazione delle porte di rete aperte  
-- Monitoraggio delle ultime modifiche ai file nella cartella `/etc`  
-- Generazione di report PDF con nome automatico che include data e ora del report  
-- Interfaccia grafica intuitiva per generare, salvare e visualizzare i report  
-- Possibilità di aprire i report precedenti direttamente dalla GUI
+- 🔧 Scansione automatica dei servizi attivi
+- 👥 Rilevamento degli utenti loggati
+- 🌐 Identificazione delle porte aperte
+- 🗂️ Tracciamento delle modifiche recenti alla cartella `/etc`
+- 📝 Generazione di report PDF strutturati e leggibili
+- 🖥️ Interfaccia grafica con supporto a tema chiaro/scuro
+- 📂 Lista dei report generati, apertura e cancellazione diretta dalla GUI
+- ✅ Compatibile con i principali sistemi Linux
 
 ---
 
@@ -22,10 +30,11 @@ Genera report PDF chiari e completi e offre una GUI moderna per gestire e visual
 
 ### Dipendenze Python
 
-Il progetto usa Python 3 e richiede:
+Il progetto usa **Python 3.9+** e richiede i seguenti pacchetti:
 
-- `PyQt6==6.6.1` (per la GUI)  
-- `fpdf2==2.6.0` (per la generazione PDF)
+- `PyQt6` (GUI)
+- `fpdf2` (generazione PDF)
+- `Pillow` (gestione immagini/logo)
 
 Questi pacchetti sono indicati in `requirements.txt`. Per installarli esegui:
 
@@ -75,7 +84,7 @@ cd snapp
 pip3 install -r requirements.txt
 ```
 
-3. Installa le dipendenze di sistema (vedi sopra)
+3. Installa le dipendenze di sistema se necessarie (vedi sopra)
 
 4. Avvia il programma:
 
@@ -103,20 +112,20 @@ python3 main.py
 ## Struttura del progetto
 
 ```
-snapp/
-├── assets/               # Risorse statiche: logo, fonts (se presenti)
-├── core/                 # Logica principale: snapshot e generazione report
+SnapAudit/
+├── assets/               # Risorse statiche (logo, ecc.)
+├── core/                 # Logica di sistema e generazione report
 │   ├── __init__.py
 │   ├── report_generator.py
 │   └── system_snapshot.py
-├── gui/                  # GUI e visualizzatore PDF
+├── gui/                  # Interfaccia grafica utente
 │   ├── __init__.py
-│   ├── main_gui.py
-│   └── pdf_viewer.py
-├── reports/              # Dove vengono salvati i report PDF
-├── main.py               # Script principale di avvio GUI
+│   └── main_gui.py
+├── reports/              # Directory dove vengono salvati i PDF
+├── main.py               # Entry point principale (avvio GUI)
 ├── requirements.txt      # Dipendenze Python
-└── README.md             # Questo file
+└── README.md             # Documentazione progetto
+
 ```
 
 ---
@@ -136,4 +145,4 @@ Per domande, problemi o suggerimenti apri una issue su GitHub o contattami diret
 
 ---
 
-Buon audit e buon lavoro con Snapp! 🚀
+Buon audit e buon lavoro con SnapAudit! 🚀
